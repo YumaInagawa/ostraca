@@ -1,0 +1,143 @@
+<main class="l-main">
+  <div class="c-pankuzu">
+    <div class="c-pankuzu__block">
+      <%= link_to "トップページ", {:controller => "teacher_pages", :action => "index"},
+      { :class => "c-pankuzu__link"} %>
+      <p class="c-pankuzu__space">></p>
+      <p class="c-pankuzu__text">時間割管理</p>
+    </div>
+  </div>
+  <div class="p-content">
+    <div class="p-content__main">
+      <h2 class="p-content__title">時間割管理</h2>
+      <div class="p-schedule">
+        <div class="p-schedule__tabwrap">
+          <ul class="p-schedule__switch">
+            <li class="active p-schedule__list">
+              <a href="#tab1" class="p-schedule__link" @click="i=0">新規登録</a>
+            </li>
+            <li class="p-schedule__list">
+              <a href="#tab2" class="p-schedule__link" @click="i=1">時間割削除</a>
+            </li>
+          </ul>
+          <div class="p-schedule__tabcontents">
+            <div id="tab1" class="p-schedule__container">
+              <!-- <form name="sch"> -->
+              <!-- 教員<input type="file" name="tea_file" id="tea_file"/>
+            教科<input type="file" name="sub_file" id="sub_file"/>
+            時間割<input type="file" name="time_file" id="time_file"/>
+          </form>
+          <input type="button" name="" value="アップロード" onclick="sendTableJson()"> -->
+              <%= form_tag '/to_rest', method: 'post', multipart: true ,class: 'p-schedule__box' do %>
+              <div class="p-schedule__box">
+                <div class="p-schedule__block">
+                  <p class="p-schedule__text">教員</p>
+                  <!-- <%= file_field_tag :teacher_csv %> -->
+                  <input type="file" name="teacher_csv" id="teacher_csv" onchange="fileSelect('subject_csv')"/>
+                </div>
+                <div class="p-schedule__block">
+                  <p class="p-schedule__text">教科</p>
+                  <!-- <%= file_field_tag :subject_csv %> -->
+                  <input type="file" name="subject_csv" id="subject_csv" disabled='disabled' onchange="fileSelect('timetable_csv')"/>
+                </div>
+                <div class="p-schedule__block">
+                  <p class="p-schedule__text">時間割</p>
+                  <!-- <%= file_field_tag :timetable_csv %> -->
+                  <input type="file" name="timetable_csv" id="timetable_csv" disabled='disabled' onchange="fileSelect('csvpost')"/>
+                </div>
+                <!-- <%= submit_tag 'アップロード' ,:class => "c-submit", :id =>"csvpost" , disables: true, :onchange => "fileSelect(subject_csv)" %> -->
+                <input type="submit" name="" value="アップロード" id="csvpost" disabled='disabled'class="c-submit">
+              </div>
+              <% end %>
+            </div>
+            <div id="tab2" class="p-schedule__container">
+                <!-- <div class="p-schedule__block">
+                  <form name="selectyear">
+                    <p class="p-schedule__text">年度</p>
+                    <select name="years" class="c-dropdown">
+                      <option value="29" class="c-dropdown__item">29</option>
+                      <option value="28" class="c-dropdown__item">28</option>
+                      <option value="27" class="c-dropdown__item">27</option>
+                      <option value="26" class="c-dropdown__item">26</option>
+                    </select>
+                  </form>
+                </div>
+                <div class="p-schedule__block">
+                  <form name="selectfb">
+                    <p class="p-schedule__text">学期</p>
+                    <select name="periods" class="c-dropdown">
+                      <option value="f" class="c-dropdown__item">前期</option>
+                      <option value="b" class="c-dropdown__item">後期</option>
+                    </select>
+                  </form>
+                </div> -->
+                <!-- <form name="selectDelete" > -->
+                <%= form_tag '/scheduledelete', method: 'post', name: 'selectDelete' ,class: 'p-schedule__box' do %>
+                <div class="p-schedule__block">
+                  <p class="p-schedule__text">年度</p>
+                  <select name="years" class="c-dropdown">
+                    <option value="29" class="c-dropdown__item">29</option>
+                    <option value="28" class="c-dropdown__item">28</option>
+                    <option value="27" class="c-dropdown__item">27</option>
+                    <option value="26" class="c-dropdown__item">26</option>
+                  </select>
+                </div>
+                <div class="p-schedule__block">
+                  <p class="p-schedule__text">学期</p>
+                  <select name="periods" class="c-dropdown">
+                    <option value="0" class="c-dropdown__item">前期</option>
+                    <option value="1" class="c-dropdown__item">後期</option>
+                  </select>
+                  <!-- <input type="button" name="deleteconfirm" value="削除内容確認" class="c-submit js-switch" onclick="deleteTimeSelect()"> -->
+                  <div id="deletetimetable">
+                  </div>
+                </div>
+                <%= submit_tag '削除' ,:class => "c-submit"%>
+                <!-- <input type="button" name="" value="削除内容確認" class="c-submit js-switch" onclick="deleteTimeSelect()"> -->
+
+                <!-- </form> -->
+
+              <!-- こっからmotalやる -->
+              <div class="c-modal js-modal">
+                <div class="c-modal__box p-content">
+                  <div class="c-modal__btn js-switch">
+                  </div>
+                  <div class="p-content__main">
+                    <p class="p-content__title">本当に削除しますか？</p>
+
+                        <!-- <table border="1">
+                        <tr>
+                          <th>曜日</th>
+                          <th>時限</th>
+                          <th>クラス</th>
+                          <th>担当教員</th>
+                          <th>科目ID</th>
+                          <th>科目名</th>
+                          <th>科目総数</th>
+                          <th>年度</th>
+                          <th>学期</th>
+                        </tr>
+                        <tr>
+                          <td>月</td>
+                          <td>2</td>
+                          <td>3B</td>
+                          <td>森本</td>
+                          <td>0001</td>
+                          <td>システム構築</td>
+                          <td>60</td>
+                          <td>29</td>
+                          <td>前期</td>
+                        </tr>
+                      </table> -->
+                  </div>
+                </div>
+                <div class="c-modal__bg js-switch"></div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

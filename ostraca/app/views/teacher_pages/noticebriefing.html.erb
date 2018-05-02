@@ -1,0 +1,92 @@
+<div class="">
+  <fieldset>
+    <legend>企業訪問・企業説明会 報告書</legend>
+    <p>
+      提出日
+    </p>
+    <!-- <input type="date" id="f-Vdate"> -->
+    <%= text_field_tag "", @notice["date"] %>
+    <%= form_tag(name: "form1") do %>
+    <table id="table-visit">
+      <tr>
+        <td>訪問先</td>
+        <td>
+          <!-- <input type="text" name="" value="" placeholder="会社名"> -->
+          <%= text_field_tag "", @notice["company_name"] %>
+        </td>
+        <td>会場</td>
+        <td>
+          <!-- <input type="text" name="" value="" placeholder="本社、〇〇支社など"> -->
+          <%= text_field_tag "", @notice["location"] %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          面談者役職
+        </td>
+        <td>
+          <!-- <input type="text" name="" value=""> -->
+          <%= text_field_tag "", @notice["pos_name"] %>
+        </td>
+        <td>
+          氏名
+        </td>
+        <td>
+          <!-- <input type="text" name="" value=""> -->
+          <%= text_field_tag "", @notice["emp_name"] %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          感想（説明事項・質問事項についても記入）
+        </td>
+        <td>
+          <!-- <textarea name="Impressions" rows="8" cols="80"></textarea> -->
+          <%= text_area_tag "", @notice["impressions"] %>
+        </td>
+      </tr>
+      <tr>
+        <td>受験希望</td>
+        <td>
+          <!-- <input type="radio" id="e-take" name="exam" value="0" checked="checked" onclick="activText('e-take')">
+          <label for="e-take">する</label>
+          <input type="radio" id="e-not" name="exam" value="1" onclick="activText('e-not')">
+          <label for="e-not">しない</label>
+          <input type="radio" id="e-cons" name="exam" value="2" onclick="activText('e-cons')">
+          <label for="e-cons">検討中</label> -->
+          <% if @notice["exam_flg"] == "0" then %>
+            <input type="radio" id="e-take" name="exam" value="0" checked="checked">
+            <label for="e-take">する</label>
+            <input type="radio" id="e-not" name="exam" value="1">
+            <label for="e-not">しない</label>
+            <input type="radio" id="e-cons" name="exam" value="2">
+            <label for="e-cons">検討中</label>
+          <% elsif @notice["exam_flg"] == "1" then %>
+            <input type="radio" id="e-take" name="exam" value="0">
+            <label for="e-take">する</label>
+            <input type="radio" id="e-not" name="exam" value="1" checked="checked">
+            <label for="e-not">しない</label>
+            <input type="radio" id="e-cons" name="exam" value="2">
+            <label for="e-cons">検討中</label>
+          <% else %>
+            <input type="radio" id="e-take" name="exam" value="0">
+            <label for="e-take">する</label>
+            <input type="radio" id="e-not" name="exam" value="1">
+            <label for="e-not">しない</label>
+            <input type="radio" id="e-cons" name="exam" value="2" checked="checked">
+            <label for="e-cons">検討中</label>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>希望理由</td>
+        <td>
+          <!-- <textarea id="e-reason" name="e-reason" rows="8" cols="80"></textarea> -->
+          <%= text_area_tag "", @notice["exam_reason"] %>
+        </td>
+      </tr>
+    </table>
+    <% end %>
+  </fieldset>
+  <!-- <input type="button" name="visit-send" value="送信" onclick="visitSend()"> -->
+</div>

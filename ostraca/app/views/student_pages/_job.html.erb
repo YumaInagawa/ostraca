@@ -1,0 +1,346 @@
+<div class="p-form">
+  <h2 class="p-form__title">就職試験受験報告書</h2>
+  <div class="p-form__block p-form__block--centering">
+    </div>
+    <%= form_tag '/exam',name: "form1",class: 'p-form__box' do %>
+      <p class="p-form__text">提出日</p>
+      <input id="f-date" type="date" class="p-form__input" name="date">
+      <table id="table-job" class="p-form__main">
+    <tbody class="p-form__container">
+      <tr class="p-form__block">
+        <p class="p-document__list-title">学籍番号</p>
+        <input type="text" id="stuId" name="stuId" value="" class="p-document__list-input" required="required">
+        <p class="p-document__list-title">氏名</p>
+        <input type="text" id="stuName" name="stuName" value="" class="p-document__list-input" required="required">
+        <td class="p-form__item p-form__text">会社名</td>
+        <td class="p-form__item">
+          <input type="company_name" class="p-form__input" name="company_name" value="">
+        </td>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">所在地</td>
+          <td class="p-form__item">
+            <select id="geoapi-prefectures" name="prefectures" class="p-form__select c-dropdown">
+              <option value="都道府県を選択してください" class=" c-dropdown__item">都道府県を選択してください</option>
+            </select>
+            <select id="geoapi-cities" name="cities" class="p-form__select c-dropdown">
+              <option value="市区町村名を選択してください" class=" c-dropdown__item">市区町村名を選択してください</option>
+            </select>
+          </td>
+        </tr>
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item p-form__text">受験日時</td>
+        <td class="p-form__item">
+          <input type="date" name="exam_date" value="" class="p-form__select">
+          <input type="time" name="exam_time" value="">
+          <p>～</p>
+          <!-- <input type="time" name="" value="">
+          <p class="p-form__text">まで</p> -->
+        </td>
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item p-form__text">受験者数</td>
+        <!-- <td class="p-form__item p-form__text">
+              男子
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="number" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              女子
+            </td> -->
+        <td class="p-form__item">
+          <input type="number" name="exam_num" value="" class="p-form__input">
+        </td>
+        <td class="p-form__item p-form__text">試験結果</td>
+        <td class="p-form__item">
+          <input type="date" name="exam_result_date" value="" class="p-form__select">
+          <!-- <input type="checkbox" name="" value="0" id="for-school">
+          <label class="p-form__text" for="for-school">学校宛</label>
+          <input type="checkbox" name="" value="1" id="for-person">
+          <label class="p-form__text" for="for-person">本人宛</label> -->
+        </td>
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item p-form__text">職種</td>
+        <td class="p-form__item">
+          <input type="text" class="p-form__input" name="industry" value="">
+        </td>
+        <td class="p-form__item p-form__text">業種</td>
+        <td class="p-form__item">
+          <input type="text" class="p-form__input" name="category" value="">
+        </td>
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item p-form__text">応募方法</td>
+        <td class="p-form__item">
+          <input type="radio" name="apply" value="0" id="pioneer" checked="checked" onclick="activText('pioneer')">
+          <label class="p-form__text" for="pioneer">自己開拓</label>
+          <input type="radio" name="apply" value="1" id="faction" onclick="activText('faction')">
+          <label class="p-form__text" for="faction">縁故</label>
+          <input type="radio" name="apply" value="2" id="school" onclick="activText('school')">
+          <label class="p-form__text" for="school">学校求人</label>
+          <input id="job-num" type="text" name="job_number" value="" disabled="disabled" class="p-form__input">
+        </td>
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item">
+          <p class="p-form__text">試験</p>
+          <input type="text" class="p-form__input" name="exam_number" value="" placeholder="例：一次、最終">
+        </td>
+        <td class="p-form__item p-form__text">面接試験</td>
+        <td class="p-form__item p-form__text">
+          <input type="radio" name="interview" value="1" id="interview-there" checked="checked">
+          <label class="p-form__text" for="interview-there">有</label>
+          <input type="radio" name="interview" value="0" id="interview-none">
+          <label class="p-form__text" for="interview-none">無</label>
+        </td>
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item">
+          <input id="personal-interview" type="radio" name="interview_type" value="1" checked="checked" onclick="activText('personal-interview')">
+          <label class="p-form__text" for="personal-interview">個人面接</label>
+        </td>
+        <td class="p-form__item">
+          <input id="group-interview" type="radio" name="interview_type" value="2" onclick="activText('group-interview')">
+          <label class="p-form__text" for="group-interview">グループ（人）</label>
+        </td>
+        <!-- <td class="p-form__item">
+          <input id="group-num" type="number" name="" value="" class="p-form__input">
+        </td> -->
+        <td class="p-form__item">
+          <input id="discussion-interview" type="radio" name="interview_type" value="3" onclick="activText('discussion-interview')">
+          <label class="p-form__text" for="discussion-interview">ディスカッション</label>
+        </td>
+        <td class="p-form__item">
+          <p class="p-form__text">テーマ</p>
+          <input id="interview-theme" type="text" name="theme" value="" class="p-form__input">
+        </td>
+        <!-- <td class="p-form__item p-form__text">
+              時間(分)
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="number" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              面接官(人)
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="number" name="" value="">
+            </td> -->
+      </tr>
+      <tr class="p-form__block">
+        <td class="p-form__item p-form__text">自由記述</td>
+        <!-- <td class="p-form__item p-form__text">質問に関する回答</td> -->
+        <td class="p-form__item p-form__text">
+          <textarea name="free_txt" rows="3" class="p-form__textarea"></textarea>
+        </td>
+      </tr>
+      <!-- <tr class="p-form__block">
+            <td class="p-form__item p-form__text">1.志望動機</td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">2.自己PR</td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">3.希望職種</td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="">
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">4.専門学校を選んだ理由</td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">5.取得資格について</td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">6.</td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">7.</td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">8.</td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">9.</td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">10.</td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="">
+            </td>
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr> -->
+      <!-- <tr class="p-form__block">
+        <td class="p-form__item p-form__text">筆記試験</td>
+        <td class="p-form__item p-form__text">
+          <input type="radio" name="write" value="1" checked id="write-there" checked="checked">
+          <label class="p-form__text" for="write-there">有</label>
+          <input type="radio" name="write" value="0" id="write-none">
+          <label class="p-form__text" for="write-none">無</label>
+        </td>
+      </tr> -->
+      <!--  <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              一般常識・SPI・時事問題
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="radio" name="test-typeA" id="typeA-write" value="1" checked="checked">
+              <label class="p-form__text" for="typeA-write">記述</label>
+              <input type="radio" name="test-typeA" id="typeA-mark" value="2">
+              <label class="p-form__text" for="typeA-mark">選択</label>
+              <td class="p-form__item p-form__text">
+                試験時間(分)
+              </td>
+              <td class="p-form__item p-form__text">
+                <input type="number" name="" value="">
+              </td>
+            </td>
+</tr>
+<tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              適正検査
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="radio" name="test-typeB" id="typeB-person" value="1" checked="checked">
+              <label class="p-form__text" for="typeB-person">性格</label>
+              <input type="radio" name="test-typeB" id="typeB-yg" value="2">
+              <label class="p-form__text" for="typeB-yg">YG</label>
+              <input type="radio" name="test-typeB" id="typeB-kure" value="3">
+              <label class="p-form__text" for="typeB-kure">クレペリン</label>
+              <input type="radio" name="test-typeB" id="typeB-other" value="4">
+              <label class="p-form__text" for="typeB-other">その他</label>
+              <td class="p-form__item p-form__text">
+                検査時間(分)
+              </td>
+              <td class="p-form__item p-form__text">
+                <input type="number" name="" value="">
+              </td>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              専門
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="radio" name="test-typeC" id="typeC-computer" value="1" checked="checked">
+              <label class="p-form__text" for="typeC-computer">コンピュータ</label>
+              <input type="radio" name="test-typeC" id="typeC-design" value="2">
+              <label class="p-form__text" for="typeC-design">デザイン</label>
+              <input type="radio" name="test-typeC" id="typeC-other" value="3">
+              <label class="p-form__text" for="typeC-other">その他</label>
+              <td class="p-form__item p-form__text">
+                検査時間(分)
+              </td>
+              <td class="p-form__item p-form__text">
+                <input type="number" name="" value="">
+              </td>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              作文(論文)
+            </td>
+            <td class="p-form__item p-form__text">
+              制限時間(分)<input type="number" name="" value="">
+            </td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">
+              <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+            </td>
+          </tr> -->
+      <tr class="p-form__block">
+        <td class="p-form__item p-form__text">
+          感想及び今後の受験者へのアドバイス
+        </td>
+        <td class="p-form__item p-form__text">
+          <textarea name="advice" class="p-form__textarea" rows="3"></textarea>
+        </td>
+      </tr>
+      <!-- <tr class="p-form__block">
+        <td class="p-form__item p-form__text">
+          <input type="radio" name="team" value="1" checked id="team-hc" checked="checked">
+          <label class="p-form__text" for="team-hc">HC</label>
+          <input type="radio" name="team" value="2" id="team-jb">
+          <label class="p-form__text" for="team-jb">JB</label>
+          <input type="radio" name="team" value="3" id="team-service">
+          <label class="p-form__text" for="team-service">公務員</label>
+        </td>
+        <td class="p-form__item p-form__text">
+          <input type="radio" name="sex" value="1" checked id="male" checked="checked">
+          <label class="p-form__text" for="male">男</label>
+          <input type="radio" name="sex" value="0" id="female">
+          <label class="p-form__text" for="female">女</label>
+        </td>
+        <td class="p-form__item p-form__text">
+          <td class="p-form__item p-form__text">
+            <input type="text" class="p-form__input" name="" value="" placeholder="学科">
+          </td>
+          <td class="p-form__item p-form__text">
+            <input type="text" class="p-form__input" name="" value="" placeholder="コース">
+          </td>
+        </td>
+      </tr> -->
+    </tbody>
+  </table>
+  <%= submit_tag "送信", class: "c-submit" %>
+  <% end %>
+  <!-- <input type="button" name="job-send" value="送信" onclick="jobSend()" class="c-submit"> -->
+
+</div>

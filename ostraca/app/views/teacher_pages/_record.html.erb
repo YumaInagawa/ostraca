@@ -1,0 +1,90 @@
+<% require 'date'
+
+  youbi = %w[日 月 火 水 木 金 土]
+
+  d = Date.today;
+  date = d.strftime("%m月 %d日(#{%w(日 月 火 水 木 金 土)[Time.now.wday]})")
+%>
+<div class="p-content is-hide" id="record" >
+  <div class="p-content__btn" onclick="fade(1)">
+    <img src="../assets/close.svg" alt="close" class="p-content__image">
+  </div>
+  <div class="p-content__main">
+    <h2 class="p-content__title">出席チェックリスト</h2>
+    <!-- <p class="p-content__subtitle"><%= date%></p> -->
+
+    
+    <%= form_tag '/insert_attend', method: 'post', multipart: true ,class: "p-content__container" do  %>
+      <!--■■■■■ デバッグ用 ■■■■■ -->
+      <div class="labela">
+        日付選択 : 
+        <label class="mylabel">
+          <div id="input"><input type="date" name="date"></div>
+        </label>
+        <select class="c-dropdown" name="youbi" onclick="selectPeriod()" style="margin-left:50px;">
+          <option class="c-dropdown__item" value="1">1:月</option>
+          <option class="c-dropdown__item" value="2">2:火</option>
+          <option class="c-dropdown__item" value="3">3:水</option>
+          <option class="c-dropdown__item" value="4">4:木</option>
+          <option class="c-dropdown__item" value="5">5:金</option>
+        </select>
+      </div>
+      <!--■■■■■ここまで デバッグ用 ■■■■■ -->
+    <div class="p-content__block p-content__block--period">
+      <p class="p-content__text">時限</p>
+      <div class="c-checklist__btnblock">
+        <!-- 時限をセレクトボックスで選ぶ煩わしさを感じたため、こうしてみた -->
+        <input type="radio" name="period-group" value="1" checked id="1" class="c-checklist__radio" onclick="selectPeriod()">
+        <label for="1" class="c-checklist__btn">１</label>
+        <input type="radio" name="period-group" value="2" id="2" class="c-checklist__radio" onclick="selectPeriod()">
+        <label for="2" class="c-checklist__btn">２</label>
+        <input type="radio" name="period-group" value="3" id="3" class="c-checklist__radio" onclick="selectPeriod()">
+        <label for="3" class="c-checklist__btn">３</label>
+        <input type="radio" name="period-group" value="4" id="4" class="c-checklist__radio" onclick="selectPeriod()">
+        <label for="4" class="c-checklist__btn">４</label>
+        <input type="radio" name="period-group" value="5" id="5" class="c-checklist__radio" onclick="selectPeriod()">
+        <label for="5" class="c-checklist__btn">５</label>
+      </div>
+    </div>
+    <div class="p-content__block p-content__block--select">
+      
+      <div id="subject">
+        <!--  科目セレクトボックスの動的生成 teacher_page.js->selectPeriod()からの動的生成-->
+        <select class="p-content__dropdown c-dropdown" name="subject" onclick="subject_select()">
+          <option class="c-dropdown__item" value="">科目を選択してください</option>
+        </select>
+        <!--  ここまで  -->
+      </div>
+    </div>
+    <!--  科目セレクトボックスの動的生成 -->
+    <div id="class_name"></div>
+    <!--  ここまで  -->
+
+    <div class="c-checklist">
+      <div class="c-checklist__block" id="st">
+        <!-- js 自動生成部分 -->
+      </div>
+      <input type="submit" name="submit" value="送信" class="c-submit">
+    </div>
+    <%end%>
+    <form>
+      <select class="c-dropdown" name="test_classes" onclick="test_show_time_table()">
+        <option class="c-dropdown__item" value="1a">1a</option>
+        <option class="c-dropdown__item" value="1b">1b</option>
+        <option class="c-dropdown__item" value="1cgr">1cgcr</option>
+        <option class="c-dropdown__item" value="1cpg">1cpg</option>
+        <option class="c-dropdown__item" value="1d">1d</option>
+        <option class="c-dropdown__item" value="2a">2a</option>
+        <option class="c-dropdown__item" value="2b">2b</option>
+        <option class="c-dropdown__item" value="2cgr">2cgr</option>
+        <option class="c-dropdown__item" value="2cpg">2cpg</option>
+        <option class="c-dropdown__item" value="2d">2d</option>
+        <option class="c-dropdown__item" value="3a">3a</option>
+        <option class="c-dropdown__item" value="3b">3b</option>
+        <option class="c-dropdown__item" value="3cgr">3cgr</option>
+      </select>
+    </form>
+
+    <div id="test_class" class="p-content__container"></div>
+  </div>
+</div>

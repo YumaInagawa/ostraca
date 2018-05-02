@@ -1,0 +1,2 @@
+class Csvdownload < ApplicationRecord
+end

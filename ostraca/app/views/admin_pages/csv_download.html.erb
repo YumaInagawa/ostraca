@@ -1,0 +1,66 @@
+<main class="l-main" id="js-admin">
+	<div class="c-pankuzu">
+		<div class="c-pankuzu__block">
+			<%= link_to "トップページ", {:controller => "teacher_pages", :action => "index"},
+			{ :class => "c-pankuzu__link"} %>
+			<p class="c-pankuzu__space">></p>
+			<p class="c-pankuzu__text">学生管理ページ</p>
+		</div>
+	</div>
+	<div class="p-content">
+		<div class="p-content__main">
+				<div class="form-group" style="margin-top: 30px; margin-bottom:30px;">
+					<label style="font-size: 20px;">CSV出力結果</label>
+				</div>
+
+				<%= form_tag('/csv_export', method:'post', class: 'p-admin__form') do %>
+				<% $json_data.each do |d|   %>
+				<div class="">
+					<label class="mybox"><%=d["sub_id"]%>:<%=d["sub_name"]%>        <small>1:遅刻 2:欠席 3:公欠</small></label>
+					<!--■■■■■■新CSVダウンロード用のデザイン  ■■■■■-->
+					<div class="sticky_table">
+					<table id="csvtable" >
+						<thead class="">
+							<tr class="">
+								<th class="">学生</th>
+								<% d["csvStudents"][0]["csvAttends"].each do |date| %>
+									<th class=""><%=date["att_date"]%></th>
+								<%end%>
+							</tr>
+							<tr class="">
+								<th class="">時限</th>
+								<% d["csvStudents"][0]["csvAttends"].each do |date| %>
+									<th class=""><%=date["att_period"]%></th>
+								<%end%>
+							</tr>
+							<tr class="">
+								<th class="">担当教員</th>
+								<% d["csvStudents"][0]["csvAttends"].each do |date| %>
+									<th class=""><%=date["tea_name"]%></th>
+								<%end%>
+							</tr>
+						</thead>
+						<tbody class="">
+							<%d["csvStudents"].each do |stu|%>
+							<tr class="">
+								<td class=""><%=stu["stu_name"]%></td>
+								<%stu["csvAttends"].each do |a|%>
+									<%date = a["att_attend"]%>
+									<td class=""><%=a["att_attend"]%></td>
+								<%end%>
+							</tr>
+							<%end%>
+						</tbody>
+					</table>
+					</div>
+					<!--■■■■■■ここまで 新CSVダウンロード用のデザイン  ■■■■■-->
+				</div>
+				<% end %>
+		</div>
+		
+		<input type="submit" name="submit" value="ダウンロード" class="c-checklist__submit">
+		<%end%>
+	</div>
+</div>
+</div>
+</main>

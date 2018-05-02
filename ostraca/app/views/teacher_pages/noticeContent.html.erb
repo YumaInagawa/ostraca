@@ -1,0 +1,778 @@
+<main class="l-main">
+  <div class="c-pankuzu">
+    <div class="c-pankuzu__block">
+      <%= link_to "トップページ", {:controller => "static_pages", :action => "home"},
+      { :class => "c-pankuzu__link"} %>
+      <p class="c-pankuzu__space">></p>
+      <%= link_to "教員ページ", {:controller => "teacher_pages", :action => "index"},
+      { :class => "c-pankuzu__link"} %>
+      <p class="c-pankuzu__space">></p>
+      <p class="c-pankuzu__text">報告書受理</p>
+    </div>
+  </div>
+  <% if @tableName == "notification" then %>
+    <div class="p-form">
+      <%= form_tag '/',name: "basic" ,class: 'p-form__box' do %>
+      <div class="p-form__block p-form__block--centering">
+        <p class="p-form__item p-form__text">欠席日</p>
+        <div class="p-form__item">
+          <!-- <input id="absence" type="date" name="" value="" class="p-form__input" required="required"> -->
+          <%= text_field_tag "", @notice["date"], id: "absence", class: "p-form__input" %>
+        </div>
+        <!-- <div class="p-form__item"><input type="button" name="" value="確定" onclick="absenceSend(),overlay()" class="p-form__submit"></div> -->
+      </div>
+      <% end %>
+      <%= form_tag '/acceptance',name: "form1",class: "p-form__box" do %>
+      <table id="table-notice" class="p-form__main">
+        <tbody class="p-form__container">
+          <tr class="p-form__block p-form__block--between">
+            <td class="p-form__item p-form__text">時限</td>
+            <!-- <td class="p-form__item p-form__text">区別</td> -->
+            <td class="p-form__item p-form__text">科目名</td>
+            <!-- <td class="p-form__item p-form__text">担当講師</td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input1">1</label>
+              <input type="checkbox" name="" id="input1" value="1" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line01" value="attend" checked id="line01-attend" class="c-radio__btn">
+              <label for="line01-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line01" value="late" id="line01-late" class="c-radio__btn">
+              <label for="line01-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line01" value="absence" id="line01-absence" class="c-radio__btn">
+              <label for="line01-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line01" value="official" id="line01-official" class="c-radio__btn">
+              <label for="line01-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_1"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input2">2</label>
+              <input type="checkbox" name="" id="input2" value="2" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line02" value="attend" checked id="line02-attend" class="c-radio__btn">
+              <label for="line02-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line02" value="late" id="line02-late" class="c-radio__btn">
+              <label for="line02-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line02" value="absence" id="line02-absence" class="c-radio__btn">
+              <label for="line02-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line02" value="official" id="line02-official" class="c-radio__btn">
+              <label for="line02-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_2"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input3">3</label>
+              <input type="checkbox" name="" id="input3" value="3" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line03" value="attend" checked id="line03-attend" class="c-radio__btn">
+              <label for="line03-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line03" value="late" id="line03-late" class="c-radio__btn">
+              <label for="line03-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line03" value="absence" id="line03-absence" class="c-radio__btn">
+              <label for="line03-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line03" value="official" id="line03-official" class="c-radio__btn">
+              <label for="line03-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_3"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input4">4</label>
+              <input type="checkbox" name="" id="input4" value="4" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line04" value="attend" checked id="line04-attend" class="c-radio__btn">
+              <label for="line04-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line04" value="late" id="line04-late" class="c-radio__btn">
+              <label for="line04-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line04" value="absence" id="line04-absence" class="c-radio__btn">
+              <label for="line04-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line04" value="official" id="line04-official" class="c-radio__btn">
+              <label for="line04-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_4"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input5">5</label>
+              <input type="checkbox" name="" id="input5" value="5" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line05" value="attend" checked id="line05-attend" class="c-radio__btn">
+              <label for="line05-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line05" value="late" id="line05-late" class="c-radio__btn">
+              <label for="line05-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line05" value="absence" id="line05-absence" class="c-radio__btn">
+              <label for="line05-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line05" value="official" id="line05-official" class="c-radio__btn">
+              <label for="line05-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_5"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input6">6</label>
+              <input type="checkbox" name="" id="input6" value="6" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line06" value="attend" checked id="line06-attend" class="c-radio__btn">
+              <label for="line06-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line06" value="late" id="line06-late" class="c-radio__btn">
+              <label for="line06-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line06" value="absence" id="line06-absence" class="c-radio__btn">
+              <label for="line06-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line06" value="official" id="line06-official" class="c-radio__btn">
+              <label for="line06-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_6"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item">
+              <label class="p-form__text p-form__label" for="input7">7</label>
+              <input type="checkbox" name="" id="input7" value="7" class="p-form__check">
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="radio" name="line07" value="attend" checked id="line07-attend" class="c-radio__btn">
+              <label for="line07-attend" class="c-radio__type">遅刻</label>
+              <input type="radio" name="line07" value="late" id="line07-late" class="c-radio__btn">
+              <label for="line07-late" class="c-radio__type">早退</label>
+              <input type="radio" name="line07" value="absence" id="line07-absence" class="c-radio__btn">
+              <label for="line07-absence" class="c-radio__type">欠課</label>
+              <input type="radio" name="line07" value="official" id="line07-official" class="c-radio__btn">
+              <label for="line07-official" class="c-radio__type">公欠</label>
+            </td> -->
+            <td class="p-form__item">
+              <select name="subject" class="c-dropdown">
+                <!-- <option value="0001" class="c-dropdown__item">システム開発</option>
+                <option value="0002" class="c-dropdown__item">システム構築</option>
+                <option value="0003" class="c-dropdown__item">Webアプリ</option>
+                <option value="0004" class="c-dropdown__item">職業指導</option> -->
+                <option class="c-dropdown__item"><%= @notice["sub_name_7"] %></option>
+              </select>
+            </td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">会社名</td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+            <td class="p-form__item"><%= text_field_tag "", @notice["company_name"], class: "p-form__input" %></td>
+            <td class="p-form__item p-form__text">目的</td>
+            <!-- <td class="p-form__item"><input type="text" name="" value="" class="p-form__input"></td> -->
+            <td class="p-form__item"><%= text_field_tag "", @notice["purpose"], class: "p-form__input" %></td>
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">場所</td>
+            <td class="p-form__item">
+              <!-- <input type="text" name="" value="" class="p-form__input"> -->
+              <%= text_field_tag "", @notice["location"], class: "p-form__input" %>
+            </td>
+            <!-- <td class="p-form__item">
+              <input type="date" name="" value="" class="p-form__input">
+              <span class="p-form__text">～</span>
+              <input type="date" name="" value="" class="p-form__input">
+            </td> -->
+          </tr>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">その他:</td>
+            <td class="p-form__item">
+              <!-- <textarea name="name" class="p-form__textarea"></textarea> -->
+              <%= text_area_tag "", @notice["other"], class: "p-form__textarea" %>
+            </td>
+          </tr>
+          <%= hidden_field_tag 'notice_id', @notice_id %>
+          <%= hidden_field_tag 'table', @tableName %>
+        </tbody>
+      </table>
+      <!-- <input type="button" name="notice-send" value="受理" class="c-submit"> -->
+      <%= submit_tag "受理", class: "c-submit" %>
+      <% end %>
+    </div>
+  <% elsif @tableName == "brifing" then %>
+    <div class="">
+      <fieldset>
+        <legend>企業訪問・企業説明会 報告書</legend>
+        <p>
+          提出日
+        </p>
+        <!-- <input type="date" id="f-Vdate"> -->
+        <%= text_field_tag "", @notice["date"] %>
+        <%= form_tag '/acceptance',name: "form1",class: "p-form__box" do %>
+        <table id="table-visit">
+          <tr>
+            <td>訪問先</td>
+            <td>
+              <!-- <input type="text" name="" value="" placeholder="会社名"> -->
+              <%= text_field_tag "", @notice["company_name"] %>
+            </td>
+            <td>会場</td>
+            <td>
+              <!-- <input type="text" name="" value="" placeholder="本社、〇〇支社など"> -->
+              <%= text_field_tag "", @notice["location"] %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              面談者役職
+            </td>
+            <td>
+              <!-- <input type="text" name="" value=""> -->
+              <%= text_field_tag "", @notice["pos_name"] %>
+            </td>
+            <td>
+              氏名
+            </td>
+            <td>
+              <!-- <input type="text" name="" value=""> -->
+              <%= text_field_tag "", @notice["emp_name"] %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              感想（説明事項・質問事項についても記入）
+            </td>
+            <td>
+              <!-- <textarea name="Impressions" rows="8" cols="80"></textarea> -->
+              <%= text_area_tag "", @notice["impressions"] %>
+            </td>
+          </tr>
+          <tr>
+            <td>受験希望</td>
+            <td>
+              <!-- <input type="radio" id="e-take" name="exam" value="0" checked="checked" onclick="activText('e-take')">
+              <label for="e-take">する</label>
+              <input type="radio" id="e-not" name="exam" value="1" onclick="activText('e-not')">
+              <label for="e-not">しない</label>
+              <input type="radio" id="e-cons" name="exam" value="2" onclick="activText('e-cons')">
+              <label for="e-cons">検討中</label> -->
+              <% if @notice["exam_flg"] == "0" then %>
+                <input type="radio" id="e-take" name="exam" value="0" checked="checked">
+                <label for="e-take">する</label>
+                <input type="radio" id="e-not" name="exam" value="1">
+                <label for="e-not">しない</label>
+                <input type="radio" id="e-cons" name="exam" value="2">
+                <label for="e-cons">検討中</label>
+              <% elsif @notice["exam_flg"] == "1" then %>
+                <input type="radio" id="e-take" name="exam" value="0">
+                <label for="e-take">する</label>
+                <input type="radio" id="e-not" name="exam" value="1" checked="checked">
+                <label for="e-not">しない</label>
+                <input type="radio" id="e-cons" name="exam" value="2">
+                <label for="e-cons">検討中</label>
+              <% else %>
+                <input type="radio" id="e-take" name="exam" value="0">
+                <label for="e-take">する</label>
+                <input type="radio" id="e-not" name="exam" value="1">
+                <label for="e-not">しない</label>
+                <input type="radio" id="e-cons" name="exam" value="2" checked="checked">
+                <label for="e-cons">検討中</label>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>希望理由</td>
+            <td>
+              <!-- <textarea id="e-reason" name="e-reason" rows="8" cols="80"></textarea> -->
+              <%= text_area_tag "", @notice["exam_reason"] %>
+            </td>
+          </tr>
+          <%= hidden_field_tag 'notice_id', @notice_id %>
+          <%= hidden_field_tag 'table', @tableName %>
+        </table>
+        <%= submit_tag "受理", class: "c-submit" %>
+        <% end %>
+      </fieldset>
+      <!-- <input type="button" name="visit-send" value="送信" onclick="visitSend()"> -->
+    </div>
+  <% else %>
+    <div class="p-form">
+      <H2 class="p-form__title">就職試験受験報告書</H2>
+      <div class="p-form__block p-form__block--centering">
+        <p class="p-form__text">提出日</p>
+        <!-- <input id="f-date" type="date" class="p-form__input"> -->
+        <%= text_field_tag "", @notice["date"] %>
+      </div>
+      <%= form_tag '/acceptance',name: "form1",class: "p-form__box" do %>
+      <table id="table-job" class="p-form__main">
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">会社名</td>
+          <!-- <td class="p-form__item p-form__text">
+            <input type="text" class="p-form__input" name="" value="" placeholder="ふりがな">
+          </td> -->
+          <td class="p-form__item p-form__text">
+            <!-- <input type="text" class="p-form__input" name="" value=""> -->
+            <%= text_field_tag "", @notice["company_name"] %>
+          </td>
+          <tr class="p-form__block">
+            <td class="p-form__item p-form__text">所在地</td>
+            <td class="p-form__item p-form__text">
+              <!-- <select id="geoapi-prefectures" name="geoapi-prefectures">
+                <option value="都道府県を選択してください">都道府県を選択してください</option>
+              </select>
+              <select id="geoapi-cities" name="geoapi-cities">
+                <option value="市区町村名を選択してください">市区町村名を選択してください</option>
+              </select> -->
+              <%= text_field_tag "", @notice["location"] %>
+            </td>
+          </tr>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">受験日時</td>
+          <td class="p-form__item p-form__text">
+            <!-- <input type="date" name="" value=""> -->
+            <%= text_field_tag "", @notice["exam_date"] %>
+            <!-- <input type="time" name="" value=""> -->
+            <%= text_field_tag "", @notice["exam_time"] %>
+            <p>～</p>
+            <!-- <input type="time" name="" value=""> -->
+            <%= text_field_tag "", @notice["exam_time"] %>
+            <p>まで</p>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">受験者数</td>
+          <!-- <td class="p-form__item p-form__text">
+                  男子
+                </td>
+                <td class="p-form__item p-form__text">
+                  <input type="number" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  女子
+                </td> -->
+          <td class="p-form__item p-form__text">
+            <!-- <input type="number" name="" value=""> -->
+            <%= text_field_tag "", @notice["exam_num"] %>
+          </td>
+          <td class="p-form__item p-form__text">試験結果</td>
+          <td class="p-form__item p-form__text">
+            <!-- <input type="date" name="" value=""> -->
+            <%= text_field_tag "", @notice["exam_result_date"] %>
+            <% if @notice["exam_result_dis"] == "0" then %>
+              <input type="checkbox" name="" value="0" checked="checked" id="for-school">
+              <label for="for-school">学校宛</label>
+              <input type="checkbox" name="" value="1" id="for-person">
+              <label for="for-person">本人宛</label>
+            <% elsif @notice["exam_result_dis"] == "1" then %>
+              <input type="checkbox" name="" value="0" id="for-school">
+              <label for="for-school">学校宛</label>
+              <input type="checkbox" name="" value="1" checked="checked" id="for-person">
+              <label for="for-person">本人宛</label>
+            <% else %>
+              <input type="checkbox" name="" value="0" id="for-school">
+              <label for="for-school">学校宛</label>
+              <input type="checkbox" name="" value="1" id="for-person">
+              <label for="for-person">本人宛</label>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">職種</td>
+          <td class="p-form__item p-form__text">
+            <!-- <input type="text" class="p-form__input" name="" value=""> -->
+            <%= text_field_tag "", @notice["category"] %>
+          </td>
+          <td class="p-form__item p-form__text">業種</td>
+          <td class="p-form__item p-form__text">
+            <!-- <input type="text" class="p-form__input" name="" value=""> -->
+            <%= text_field_tag "", @notice["industry"] %>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">応募方法</td>
+          <td class="p-form__item p-form__text">
+            <% if @notice["app_method"] == "0" then %>
+              <input type="radio" name="apply" value="0" id="pioneer" checked="checked">
+              <label for="pioneer">自己開拓</label>
+              <input type="radio" name="apply" value="1" id="faction">
+              <label for="faction">縁故</label>
+              <input type="radio" name="apply" id="school">
+              <label for="school">学校求人</label>
+              <input id="job-num" type="text" name="" value="">
+            <% elsif @notice["app_method"] == "1" then %>
+              <input type="radio" name="apply" value="0" id="pioneer">
+              <label for="pioneer">自己開拓</label>
+              <input type="radio" name="apply" value="1" id="faction" checked="checked">
+              <label for="faction">縁故</label>
+              <input type="radio" name="apply" id="school">
+              <label for="school">学校求人</label>
+              <input id="job-num" type="text" name="" value="">
+            <% else %>
+              <input type="radio" name="apply" value="0" id="pioneer">
+              <label for="pioneer">自己開拓</label>
+              <input type="radio" name="apply" value="1" id="faction">
+              <label for="faction">縁故</label>
+              <input type="radio" name="apply" id="school" checked="checked">
+              <label for="school">学校求人</label>
+              <!-- <input id="job-num" type="text" name="" value=""> -->
+              <%= text_field_tag "", @notice["job_number"], id: "job-num" %>
+            <% end %>
+
+            <!-- <input type="radio" name="apply" value="0" id="pioneer" checked="checked" onclick="activText('pioneer')">
+            <label for="pioneer">自己開拓</label>
+            <input type="radio" name="apply" value="1" id="faction" onclick="activText('faction')">
+            <label for="faction">縁故</label>
+            <input type="radio" name="apply" id="school" onclick="activText('school')">
+            <label for="school">学校求人</label>
+            <input id="job-num" type="text" name="" value=""> -->
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <p class="p-form__text">試験</p>
+            <input type="text" class="p-form__input" name="" value="" placeholder="例：一次、最終">
+          </td>
+          <td class="p-form__item p-form__text">面接試験</td>
+          <td class="p-form__item p-form__text">
+            <% if @notice["presence"] == "1" then %>
+              <input type="radio" name="interview" value="1" id="interview-there" checked="checked">
+              <label for="interview-there">有</label>
+              <input type="radio" name="interview" value="0" id="interview-none">
+              <label for="interview-none">無</label>
+            <% else %>
+              <input type="radio" name="interview" value="1" id="interview-there">
+              <label for="interview-there">有</label>
+              <input type="radio" name="interview" value="0" id="interview-none" checked="checked">
+              <label for="interview-none">無</label>
+            <% end %>
+            <!-- <input type="radio" name="interview" value="1" id="interview-there" checked="checked">
+            <label for="interview-there">有</label>
+            <input type="radio" name="interview" value="0" id="interview-none">
+            <label for="interview-none">無</label> -->
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">
+            <% if @notice["method"] == "1" then %>
+              <input id="personal-interview" type="radio" name="interview-type" value="1" checked="checked">
+              <label for="personal-interview">個人面接</label>
+            <% else %>
+              <input id="personal-interview" type="radio" name="interview-type" value="1">
+              <label for="personal-interview">個人面接</label>
+            <% end %>
+          </td>
+          <td class="p-form__item p-form__text">
+            <% if @notice["method"] == "2" then %>
+              <input id="group-interview" type="radio" name="interview-type" value="2" checked="checked">
+              <!-- <label for="group-interview">グループ（人）</label> -->
+            <% else %>
+              <input id="group-interview" type="radio" name="interview-type" value="2">
+              <!-- <label for="group-interview">グループ（人）</label> -->
+            <% end %>
+          </td>
+          <!-- <td class="p-form__item">
+            <input id="group-num" type="number" name="" value="" class="p-form__input">
+          </td> -->
+          <td class="p-form__item p-form__text">
+            <% if @notice["method"] == "3" then %>
+              <input id="discussion-interview" type="radio" name="interview-type" value="3" checked="checked">
+              <label for="discussion-interview">ディスカッション</label>
+            <% else %>
+              <input id="discussion-interview" type="radio" name="interview-type" value="3">
+              <label for="discussion-interview">ディスカッション</label>
+            <% end %>
+          </td>
+          <td class="p-form__item p-form__text">
+            テーマ
+            <!-- <input id="interview-theme" type="text" name="" value="" class="p-form__input"> -->
+            <%= text_field_tag "", @notice["theme"] %>
+          </td>
+          <!-- <td class="p-form__item p-form__text">
+                  時間(分)
+                </td>
+                <td class="p-form__item p-form__text">
+                  <input type="number" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  面接官(人)
+                </td>
+                <td class="p-form__item p-form__text">
+                  <input type="number" name="" value="">
+                </td> -->
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">自由記述</td>
+          <!-- <td class="p-form__item p-form__text">質問に関する回答</td> -->
+          <td class="p-form__item p-form__text">
+            <!-- <textarea name="" row class="p-form__textarea"s="3"><%= @freeText %></textarea> -->
+            <%= text_area_tag "", @notice["free_txt"] %>
+          </td>
+        </tr>
+        <!-- <tr class="p-form__block">
+                <td class="p-form__item p-form__text">1.志望動機</td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">2.自己PR</td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">3.希望職種</td>
+                <td class="p-form__item p-form__text">
+                  <input type="text" class="p-form__input" name="" value="">
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">4.専門学校を選んだ理由</td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">5.取得資格について</td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">6.</td>
+                <td class="p-form__item p-form__text">
+                  <input type="text" class="p-form__input" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">7.</td>
+                <td class="p-form__item p-form__text">
+                  <input type="text" class="p-form__input" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">8.</td>
+                <td class="p-form__item p-form__text">
+                  <input type="text" class="p-form__input" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">9.</td>
+                <td class="p-form__item p-form__text">
+                  <input type="text" class="p-form__input" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">10.</td>
+                <td class="p-form__item p-form__text">
+                  <input type="text" class="p-form__input" name="" value="">
+                </td>
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr> -->
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">筆記試験</td>
+          <td class="p-form__item p-form__text">
+            <% if @notice["presence"] == "1" then %>
+              <input type="radio" name="write" value="1" checked id="write-there" checked="checked">
+              <label for="write-there">有</label>
+              <input type="radio" name="write" value="0" id="write-none">
+              <label for="write-none">無</label>
+            <% else %>
+              <input type="radio" name="write" value="1" checked id="write-there">
+              <label for="write-there">有</label>
+              <input type="radio" name="write" value="0" id="write-none" checked="checked">
+              <label for="write-none">無</label>
+            <% end %>
+          </td>
+        </tr>
+        <!--  <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  一般常識・SPI・時事問題
+                </td>
+                <td class="p-form__item p-form__text">
+                  <input type="radio" name="test-typeA" id="typeA-write" value="1" checked="checked">
+                  <label for="typeA-write">記述</label>
+                  <input type="radio" name="test-typeA" id="typeA-mark" value="2">
+                  <label for="typeA-mark">選択</label>
+                  <td class="p-form__item p-form__text">
+                    試験時間(分)
+                  </td>
+                  <td class="p-form__item p-form__text">
+                    <input type="number" name="" value="">
+                  </td>
+                </td>
+    </tr>
+    <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  適正検査
+                </td>
+                <td class="p-form__item p-form__text">
+                  <input type="radio" name="test-typeB" id="typeB-person" value="1" checked="checked">
+                  <label for="typeB-person">性格</label>
+                  <input type="radio" name="test-typeB" id="typeB-yg" value="2">
+                  <label for="typeB-yg">YG</label>
+                  <input type="radio" name="test-typeB" id="typeB-kure" value="3">
+                  <label for="typeB-kure">クレペリン</label>
+                  <input type="radio" name="test-typeB" id="typeB-other" value="4">
+                  <label for="typeB-other">その他</label>
+                  <td class="p-form__item p-form__text">
+                    検査時間(分)
+                  </td>
+                  <td class="p-form__item p-form__text">
+                    <input type="number" name="" value="">
+                  </td>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  専門
+                </td>
+                <td class="p-form__item p-form__text">
+                  <input type="radio" name="test-typeC" id="typeC-computer" value="1" checked="checked">
+                  <label for="typeC-computer">コンピュータ</label>
+                  <input type="radio" name="test-typeC" id="typeC-design" value="2">
+                  <label for="typeC-design">デザイン</label>
+                  <input type="radio" name="test-typeC" id="typeC-other" value="3">
+                  <label for="typeC-other">その他</label>
+                  <td class="p-form__item p-form__text">
+                    検査時間(分)
+                  </td>
+                  <td class="p-form__item p-form__text">
+                    <input type="number" name="" value="">
+                  </td>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  作文(論文)
+                </td>
+                <td class="p-form__item p-form__text">
+                  制限時間(分)<input type="number" name="" value="">
+                </td>
+              </tr>
+              <tr class="p-form__block">
+                <td class="p-form__item p-form__text">
+                  <textarea name="name" class="p-form__textarea" rows="3"></textarea>
+                </td>
+              </tr> -->
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">
+            感想及び今後の受験者へのアドバイス
+          </td>
+          <td class="p-form__item p-form__text">
+            <!-- <textarea name="name" class="p-form__textarea" rows="3"></textarea> -->
+            <%= text_area_tag "name", @notice["advice"], class: "p-form__textarea" %>
+          </td>
+        </tr>
+        <!-- <tr class="p-form__block">
+          <td class="p-form__item p-form__text">
+            <input type="radio" name="team" value="1" checked id="team-hc" checked="checked">
+            <label for="team-hc">HC</label>
+            <input type="radio" name="team" value="2" id="team-jb">
+            <label for="team-jb">JB</label>
+            <input type="radio" name="team" value="3" id="team-service">
+            <label for="team-service">公務員</label>
+          </td>
+          <td class="p-form__item p-form__text">
+            <input type="radio" name="sex" value="1" checked id="male" checked="checked">
+            <label for="male">男</label>
+            <input type="radio" name="sex" value="0" id="female">
+            <label for="female">女</label>
+          </td>
+          <td class="p-form__item p-form__text">
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="" placeholder="学科">
+            </td>
+            <td class="p-form__item p-form__text">
+              <input type="text" class="p-form__input" name="" value="" placeholder="コース">
+            </td>
+          </td>
+        </tr> -->
+        <%= hidden_field_tag 'notice_id', @notice_id %>
+        <%= hidden_field_tag 'table', @tableName %>
+      </table>
+      <%= submit_tag "受理", class: "c-submit" %>
+      <% end %>
+      <!-- <input type="button" name="job-send" value="送信" onclick="jobSend()" class="c-submit"> -->
+    </div>
+  <% end %>
+</main>

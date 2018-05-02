@@ -1,0 +1,225 @@
+<!-- 報告書 -->
+<div class="p-form">
+  <%= form_tag '/insert_report', method: 'post', multipart: true, class: "p-form__box" do %>
+  <% end %>
+  <%= form_tag '/insert_report', method: 'post', multipart: true, class: "p-form__box" do %>
+  <h2 class="p-form__title">遅刻・公欠等申請</h2>
+  <div class="p-document__student-block">
+    <p class="p-document__list-title">学籍番号</p>
+    <input type="text" id="stuId" name="stuId" value="" class="p-document__list-input" required="required">
+    <p class="p-document__list-title">氏名</p>
+    <input type="text" id="stuName" name="stuName" value="" class="p-document__list-input" required="required">
+  </div>
+  <div class="p-form__block p-form__block--centering">
+    <p class="p-form__text">欠席日</p>
+    <div class="p-form__item">
+      <input id="absence" type="date" name="absence" value="" class="p-form__input" required="required">
+    </div>
+    <!-- <div class="p-form__item"><input type="button" name="" value="確定" onclick="absenceSend(),overlay()" class="p-form__submit"></div> -->
+    <div class="p-form__item"><input type="button" name="" value="確定" onclick="absenceSend()" class="p-form__submit"></div>
+  </div>
+
+    <table id="table-notice" class="p-form__main">
+      <tbody class="p-form__container">
+        <tr class="p-form__block p-form__block--between">
+          <td class="p-form__item p-form__text">時限</td>
+          <td class="p-form__item p-form__text">区別</td>
+          <td class="p-form__item p-form__text">科目名</td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input1">1</label>
+            <input type="checkbox" name="input1" id="input1" value="1" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line01" value="attend" checked id="line01-attend" class="c-radio__btn">
+            <label for="line01-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line01" value="late" id="line01-late" class="c-radio__btn">
+            <label for="line01-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line01" value="absence" id="line01-absence" class="c-radio__btn">
+            <label for="line01-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line01" value="official" id="line01-official" class="c-radio__btn">
+            <label for="line01-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+          <select name="subject1" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_1" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input2">2</label>
+            <input type="checkbox" name="input2" id="input2" value="2" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line02" value="attend" checked id="line02-attend" class="c-radio__btn">
+            <label for="line02-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line02" value="late" id="line02-late" class="c-radio__btn">
+            <label for="line02-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line02" value="absence" id="line02-absence" class="c-radio__btn">
+            <label for="line02-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line02" value="official" id="line02-official" class="c-radio__btn">
+            <label for="line02-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+            <select name="subject2" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_2" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input3">3</label>
+            <input type="checkbox" name="input3" id="input3" value="3" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line03" value="attend" checked id="line03-attend" class="c-radio__btn">
+            <label for="line03-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line03" value="late" id="line03-late" class="c-radio__btn">
+            <label for="line03-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line03" value="absence" id="line03-absence" class="c-radio__btn">
+            <label for="line03-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line03" value="official" id="line03-official" class="c-radio__btn">
+            <label for="line03-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+            <select name="subject3" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_3" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input4">4</label>
+            <input type="checkbox" name="input4" id="input4" value="4" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line04" value="attend" checked id="line04-attend" class="c-radio__btn">
+            <label for="line04-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line04" value="late" id="line04-late" class="c-radio__btn">
+            <label for="line04-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line04" value="absence" id="line04-absence" class="c-radio__btn">
+            <label for="line04-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line04" value="official" id="line04-official" class="c-radio__btn">
+            <label for="line04-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+            <select name="subject4" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_4" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input5">5</label>
+            <input type="checkbox" name="input5" id="input5" value="5" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line05" value="attend" checked id="line05-attend" class="c-radio__btn">
+            <label for="line05-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line05" value="late" id="line05-late" class="c-radio__btn">
+            <label for="line05-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line05" value="absence" id="line05-absence" class="c-radio__btn">
+            <label for="line05-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line05" value="official" id="line05-official" class="c-radio__btn">
+            <label for="line05-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+            <select name="subject5" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_5" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input6">6</label>
+            <input type="checkbox" name="input6" id="input6" value="6" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line06" value="attend" checked id="line06-attend" class="c-radio__btn">
+            <label for="line06-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line06" value="late" id="line06-late" class="c-radio__btn">
+            <label for="line06-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line06" value="absence" id="line06-absence" class="c-radio__btn">
+            <label for="line06-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line06" value="official" id="line06-official" class="c-radio__btn">
+            <label for="line06-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+            <select name="subject6" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_6" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item">
+            <label class="p-form__text p-form__label" for="input7">7</label>
+            <input type="checkbox" name="input7" id="input7" value="7" class="p-form__check">
+          </td>
+          <td class="p-form__item c-radio">
+            <input type="radio" name="line07" value="attend" checked id="line07-attend" class="c-radio__btn">
+            <label for="line07-attend" class="c-radio__type">遅刻</label>
+            <input type="radio" name="line07" value="late" id="line07-late" class="c-radio__btn">
+            <label for="line07-late" class="c-radio__type">早退</label>
+            <input type="radio" name="line07" value="absence" id="line07-absence" class="c-radio__btn">
+            <label for="line07-absence" class="c-radio__type">欠課</label>
+            <input type="radio" name="line07" value="official" id="line07-official" class="c-radio__btn">
+            <label for="line07-official" class="c-radio__type">公欠</label>
+          </td>
+          <td class="p-form__item">
+            <select name="subject7" class="c-dropdown p-form__select">
+            <option value="" class="c-dropdown__item">==科目名==</option>
+            <% @subject.each { |s| %>
+              <option id="sub_name_7" value="<%=s["sub_name"]%>" class="c-dropdown__item"><%=s["sub_name"]%></option>
+            <% } %>
+          </select>
+          </td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">会社名</td>
+          <td class="p-form__item"><input type="text" id="company" name="company" value="" class="p-form__input"></td>
+          <td class="p-form__item p-form__text">目的</td>
+          <td class="p-form__item"><input type="text" id="purpose" name="purpose" value="" class="p-form__input"></td>
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">場所</td>
+          <td class="p-form__item">
+            <input type="text" id="location" name="location" value="" class="p-form__input">
+          </td>
+          <!-- <td class="p-form__item">
+            <input type="date" name="" value="" class="p-form__input">
+            <span class="p-form__text">～</span>
+            <input type="date" name="" value="" class="p-form__input">
+          </td> -->
+        </tr>
+        <tr class="p-form__block">
+          <td class="p-form__item p-form__text">その他:</td>
+          <td class="p-form__item">
+            <textarea id="other" name="other" class="p-form__textarea"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <input type="submit" name="notice-send" value="送信" onclick="noticeSend()" class="c-submit"> -->
+    <%= submit_tag "送信", class: "c-submit" %>
+  <% end %>
+</div>

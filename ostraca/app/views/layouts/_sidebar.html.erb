@@ -1,0 +1,61 @@
+<aside class="l-side">
+  <div class="l-side__container">
+    <div class="l-side__closebox js-btn">
+    </div>
+    <div class="l-side__head js-btn">
+      <div class="c-navigator">
+        <span class="c-navigator__item"></span>
+        <span class="c-navigator__item"></span>
+        <span class="c-navigator__item"></span>
+      </div>
+    </div>
+    <div class="l-side__box l-side__box--notification">
+      <div class="l-side__block l-side__block--wide">
+        <p class="l-side__title">Notification</p>
+        <% if $count == '0' then %>
+          <p class="l-side__text">現在 通知はございません</p>
+        <% else %>
+          <%= link_to "現在#{$count}件の通知があります", {:controller => "teacher_pages", :action => "noticelist"},{ :class => "c-nav__item"} %>
+          <!-- <p class="l-side__text">現在 通知はあるぞ</p> -->
+        <% end %>
+        <p class="l-side__text"></p>
+      </div>
+      <div class="l-side__block l-side__block--small js-btn">
+        <img src="./assets/notification.svg" alt="" class="l-side__icon">
+      </div>
+    </div>
+    <div class="l-side__box l-side__box--nav">
+      <div class="l-side__block l-side__block--wide">
+        <p class="l-side__title">Navigation</p>
+        <ul class="c-nav">
+          <!-- <li class="c-nav__list">
+            <%= link_to "トップページ", {:controller => "static_pages", :action => "home"},{ :class => "c-nav__item"} %>
+          </li> -->
+          <% if session[:user_email].include?('@st.hsc.ac.jp') %>
+            <li class="c-nav__list">
+              <%= link_to "学生用ページ", {:controller => "student_pages", :action => "index"},{ :class => "c-nav__item"} %>
+              <ul class="c-nav__nest">
+                <li class="c-nav__list">
+                  <%= link_to "報告書提出", {:controller => "student_pages", :action => "report"},{ :class => "c-nav__item"} %>
+                </li>
+              </ul>
+            </li>
+        <% else %>
+          <li class="c-nav__list">
+            <%= link_to "教員用ページ", {:controller => "teacher_pages", :action => "index"},{ :class => "c-nav__item"} %>
+            <ul class="c-nav__nest">
+              <li class="c-nav__list">
+                <%= link_to "学生管理", {:controller => "admin_pages", :action => "index"},{ :class => "c-nav__item"} %>
+                <%= link_to "時間割管理", {:controller => "admin_pages", :action => "schedule"},{ :class => "c-nav__item"} %>
+                <%= link_to "CSVダウンロード", {:controller => "admin_pages", :action => "csvdisplay"},{ :class => "c-nav__item"} %>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+      </div>
+      <div class="l-side__block l-side__block--small js-btn">
+        <img src="./assets/link.svg" alt="" class="l-side__icon">
+      </div>
+    </div>
+  </div>
+</aside>

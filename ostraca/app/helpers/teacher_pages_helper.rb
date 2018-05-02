@@ -1,0 +1,4 @@
+module TeacherPagesHelper
+
+	$teacher = ''
+end

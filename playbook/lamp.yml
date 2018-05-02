@@ -1,0 +1,53 @@
+- hosts: all
+  user: vagrant
+  sudo: yes
+  tasks:
+    - name: install Apache
+      yum: name=httpd state=latest
+
+    - name: enbale & start service httpd
+      systemd: name=httpd state=started enabled=true
+    
+    - name: install php & php modules
+      yum: name="{{ item }}" state=latest
+      with_items:
+        - php
+        - php-mbstring
+        - php-mysql
+        - php-intl
+        - php-gd
+    
+    - name: restart service httpd
+      systemd: name=httpd state=restarted
+
+    - name: install Mariadb
+      yum: name="{{ item }}" state=present
+      with_items:
+        - mariadb
+        - mariadb-server
+
+    - name: enbale & start service mariadb
+      systemd: name=mariadb state=started enabled=true
+
+    - name: Configure Mariadb
+      shell:
+        mysqladmin -u root password 2anetwork;
+        mysql -u root -p2anetwork -e 'create database wp;';
+        mysql -u root -p2anetwork -e 'grant all privileges
+          on wp.* to "wpadmin"@"localhost" identified
+          by "password";';
+        mysql -u root -p2anetwork -e 'flush privileges;';
+    
+    - name: download Wordpress
+      get_url:
+        url: https://ja.wordpress.org/wordpress-4.9.5-ja.zip
+        dest: /tmp
+
+    - name: install unzip
+      yum: name=unzip state=latest
+
+    - name: unarchive wordpress
+      unarchive:
+        src: /tmp/wordpress-4.9.5-ja.zip
+        dest: /var/www/html
+    

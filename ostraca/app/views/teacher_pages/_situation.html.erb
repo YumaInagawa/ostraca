@@ -1,0 +1,34 @@
+<div class="p-content is-hide" id="situation">
+  <div class="p-content__btn" onclick="fade(0)">
+    <img src="../assets/close.svg" alt="close">
+  </div>
+  <div class="p-content__main">
+    <h2 class="p-content__title">出席状況</h2>
+    <div class="p-content__box">
+      <p class="p-content__text">学年</p>
+      <select class="c-dropdown" name="situation_years">
+        <option class="c-dropdown__item" value="1">1</option>
+        <option class="c-dropdown__item" value="2">2</option>
+        <option class="c-dropdown__item" value="3">3</option>
+      </select>
+      <p class="p-content__text">クラス</p>
+      <select class="c-dropdown" name="situation_class" onclick="select_classes()">
+        <option class="c-dropdown__item" value="1">A</option>
+        <option class="c-dropdown__item" value="2">B</option>
+        <option class="c-dropdown__item" value="3">C</option>
+        <option class="c-dropdown__item" value="3">D</option>
+        <option class="c-dropdown__item" value="3">E</option>
+        <option class="c-dropdown__item" value="3">F</option>
+        <option class="c-dropdown__item" value="3">G</option>
+      </select>
+    </div>
+    <div class="p-content__box">
+      <div id="div2" class="p-content__block">
+        <select class="c-dropdown" name="student" id="teacher_students" onchange="te_select_students()">
+          <option class="c-dropdown__item" value="">==生徒を選択してください==</option>
+        </select>
+      </div>
+      <div id="div3" class="p-content__block"></div>
+    </div>
+  </div>
+</div>

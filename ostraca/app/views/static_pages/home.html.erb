@@ -1,0 +1,16 @@
+<div class="l-main">
+  <div class="c-pankuzu">
+    <div class="c-pankuzu__block"></div>
+  </div>
+  <div class="p-content">
+    <div class="p-content__main">
+      <p class="p-content__title">学生出席管理システム</p>
+      <div class="p-content__box">
+        <%= link_to "学生用ページ", {:controller => "student_pages", :action => "index"},
+          { :class => "p-content__link p-content__link--a"} %>
+        <%= link_to "教員用ページ", {:controller => "teacher_pages", :action => "index"},
+          { :class => "p-content__link p-content__link--b"} %>
+      </div>
+    </div>
+  </div>
+</div>

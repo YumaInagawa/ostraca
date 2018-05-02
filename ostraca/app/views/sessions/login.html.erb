@@ -1,0 +1,30 @@
+<main class="p-signin" id="js-login">
+  <div class="p-signin__overlay"></div>
+  <div class="p-signin__container">
+    <div class="p-signin__separate">
+      <h1 class="p-signin__title"></h1>
+    </div>
+    <div class="p-signin__separate">
+      <div class="p-signin__box">
+        <div class="p-signin__txtblock">
+          <h2 class="p-signin__heading">学生も教員も<br/>全て１つに</h2>
+          <p class="p-signin__text p-signin__text--wide">
+            OSTRACAは、教員・学生用の管理アプリケーションです。
+          </p>
+          <p class="p-signin__text p-signin__text--wide">
+            教員は学生の出欠・報告書のいつでも確認することができます。
+          </p>
+          <p class="p-signin__text p-signin__text--wide">
+            学生は、学外でも時間割や出席状況を参照・報告書の提出ができるでしょう。
+          </p>
+        </div>
+        <div class="p-signin__btnblock">
+          <p class="p-signin__subheading">
+            今すぐOSTRACAで効率的に管理しましょう
+          </p>
+          <%= link_to 'Login', user_google_oauth2_omniauth_authorize_path, class: "p-signin__login" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
