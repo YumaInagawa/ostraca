@@ -7,8 +7,8 @@ node {
         sh "echo 'Hello Jenkins from Jenkinsfile'"
     }
 
-    stage('third job'){
-        sh "echo test"
+    stage('second job'){
+        sh "ls -l"
     }
 
 }
