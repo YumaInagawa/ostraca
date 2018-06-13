@@ -1,4 +1,0 @@
-module TeacherPagesHelper
-
-	$teacher = ''
-end

@@ -1,2 +1,0 @@
-class Csvdownload < ApplicationRecord
-end
